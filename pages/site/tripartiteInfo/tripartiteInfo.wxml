@@ -1,0 +1,127 @@
+<view class="tripartiteInfo">
+	<osFill_navBar title="站点详情" leftShow placeholder></osFill_navBar>
+	<view class="tripartiteInfo_head" style="margin-bottom: {{imgShow?'0':'-100rpx'}}">
+		<swiper indicator-dots="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
+			<block wx:for="{{sitePic}}" wx:key="index">
+				<swiper-item>
+					<!-- 图片尺寸675px*321px -->
+					<image src="{{item}}" class="slide-image" data-src="{{item}}" bindtap="showImg" mode="aspectFit" />
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+	<view class="tripartiteInfo_view tripartiteInfo_info">
+		<view class="tripartiteInfo_info_head_left_name">{{siteInfoData.EqptCode}}</view>
+		<view class="tripartiteInfo_info_head">
+			<view class="tripartiteInfo_info_head_left">
+				<view class="tripartiteInfo_info_head_left_address">{{siteInfoData.address||'暂无详情地址'}}</view>
+				<view class="tripartiteInfo_info_head_left_juli" style="margin-top: 5px;">距你{{siteInfoData.juli}}公里</view>
+			</view>
+			<view class="tripartiteInfo_info_head_right">
+				<view class="tripartiteInfo_head_shareBox" catchtap="lan">
+					<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_daohang.png" mode="widthFix" />
+					地图
+				</view>
+				<button class="tripartiteInfo_head_shareBox" open-type="share" data-type="info" style="width: 80rpx;">
+					<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_fenxiang.png" mode="widthFix" />
+					分享
+				</button>
+			</view>
+		</view>
+		<van-divider hairline borderColor="#F4F5F6" customStyle="margin: 30rpx 0 10rpx" />
+
+		<view class="tripartiteInfo_info_priceList">
+			<view class="tripartiteInfo_info_priceList_view tripartiteInfo_info_priceList_blue" wx:if="{{siteInfoData.notShowUrea }}">
+				<view class="siteList_li_priceList_view_view">
+					尿素售价<view><text>￥</text><text>{{siteInfoData.Price}}</text><text>/Kg</text></view>
+				</view>
+			</view>
+			<view class="tripartiteInfo_info_priceList_view tripartiteInfo_info_priceList_blue"  wx:for="{{siteInfoData.commodityList}}" wx:for-index="commodityIdx" wx:for-item="commodityItem" wx:key="commodityIdx">
+				<view class="siteList_li_priceList_view_view">
+					{{commodityItem.name}}<view><text>￥</text><text>{{commodityItem.sku[0].price}}</text><text>/桶</text></view>
+				</view>
+			</view>
+			<view class="tripartiteInfo_info_priceList_view {{oilIdx%2?'tripartiteInfo_info_priceList_orange':'tripartiteInfo_info_priceList_red'}}" wx:for="{{siteInfoData.oil_pricesList}}" wx:for-index="oilIdx" wx:for-item="oilItem" wx:key="oilIdx">
+				<view class="{{oilIdx%2?'siteList_li_priceList_view_view':''}}">
+					{{oilItem.name}}<view><text>￥</text><text>{{oilItem.price}}</text><text>/L</text></view>
+				</view>
+			</view>
+		</view>
+
+		<view class="tripartiteInfo_info_footer">
+			<view class="tripartiteInfo_info_footer_orange" wx:for="{{siteInfoData.actives}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx" bind:tap="showFn">
+				<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_hb.png" mode="widthFix" />
+				<view>{{itemName.active_name}}</view>
+			</view>
+			<view class="tripartiteInfo_info_footer_blue" wx:if="{{siteInfoData.is_zy==0}}">官方合作伙伴</view>
+		</view>
+	</view>
+	<view class="tripartiteInfo_view" style="padding: 0;">
+		<view class="tripartiteInfo_view_li">
+			<view class="tripartiteInfo_view_li_left">站点场地</view>
+			<view class="tripartiteInfo_view_li_right tripartiteInfo_view_li_type">{{siteInfoData.SiteTypeStr}}</view>
+		</view>
+		<van-divider hairline borderColor="#F4F5F6" customStyle="margin: 30rpx 0 0" />
+		<view class="tripartiteInfo_view_li">
+			<view class="tripartiteInfo_view_li_left">支付方式</view>
+			<view class="tripartiteInfo_view_li_right tripartiteInfo_view_li_pay">
+				<view>微信支付</view>
+				<view wx:if="{{siteInfoData.is_zy ||siteInfoData.is_other}}">电子卡支付</view>
+			</view>
+		</view>
+		<van-divider hairline borderColor="#F4F5F6" customStyle="margin: 30rpx 0 0" />
+		<view wx:if="{{siteInfoData.tag}}">
+			<view class="tripartiteInfo_view_li">
+				<view class="tripartiteInfo_view_li_left">站点服务</view>
+				<view class="tripartiteInfo_view_li_right"></view>
+			</view>
+			<view class="optionPopup_li_tagList">
+				<view class="optionPopup_li_tag" wx:for="{{label}}">{{item}}</view>
+			</view>
+			<van-divider hairline borderColor="#F4F5F6" customStyle="margin: 30rpx 0 0" />
+		</view>
+	</view>
+	<view class="tripartiteInfo_view tripartiteInfo_introduce" wx:if="{{siteInfoData.introduce}}">
+		<view class="tripartiteInfo_introduce_head">站点详情 <text></text></view>
+		<view class="tripartiteInfo_introduce_footer">{{siteInfoData.introduce||'暂无站点介绍'}}</view>
+	</view>
+
+	<!-- 底部 -->
+	<view class="tripartiteInfo_footer">
+		<van-button round plain icon="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/shouye_proc.png" customStyle="min-width: 260rpx" bindtap="toIndex">
+			会员中心
+		</van-button>
+		<!-- <van-button wx:if="{{!siteInfoData.is_hx_station}}" round icon="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_smjz.png" color="#4456FD" customStyle="min-width: 260rpx" bindtap="jiazhu">
+			扫码加注
+		</van-button> 
+		<van-button round wx:else color="#4456FD" customStyle="min-width: 260rpx" bindtap="ishxstationFun">
+			购买团购券
+		</van-button> -->
+	</view>
+	<login></login>
+
+	<van-popup show="{{ show }}" round z-index="999" position="bottom" bind:click-overlay="showFn" customStyle="height: 60vh;background-color: #F7F8F9">
+		<view class="popup">
+			<view class="popup_head">
+				站点活动
+				<view class="popup_head_close" bindtap="showFn">关闭</view>
+			</view>
+			<!-- <view class="popup_li" wx:for="{{siteInfoData.actives}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+				<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_hb.png" mode="widthFix" />
+				<view>{{itemName.active_name}}</view>
+			</view> -->
+			<!-- <view class="popup_li popup_li_blue" wx:if="{{siteInfoData.is_zy==0}}">官方合作伙伴</view> -->
+			<view class="activesListBox" wx:if="{{siteInfoData.actives.length > 0}}">
+				<view class="activesList_li" wx:for="{{siteInfoData.actives}}" wx:key="index">
+					<view class="activesList_li_left">
+						<image style="width: 70rpx;display: block;" src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/recharge_czhd.png" mode="widthFix" />
+					</view>
+					<view class="activesList_li_right">
+						<view class="activesList_li_right_title line-">{{item.active_name}}</view>
+						<view class="activesList_li_right_tip line-">{{item.activeinfo.mbz_string}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</van-popup>
+</view>

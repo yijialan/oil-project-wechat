@@ -1,0 +1,160 @@
+<view class="tripartiteInfo">
+				<van-nav-bar title="站点详情" right-text="按钮" fixed="{{true}}" placeholder="{{true}}" safe-area-inset-top="{{true}}" left-arrow="{{false}}" bind:click-left="onClickLeft" bind:click-right="onClickRight" custom-style="background-color: rgba(255,255,255,0); " border="false">
+								<view slot="left">
+												<view class="leftTops_left">
+																<view class="leftTops_left_View" bindtap="goBack">
+																				<van-icon name="arrow-left" size="14" color="#333333" />
+																</view>
+																<view class="toheassborder"></view>
+																<view class="leftTops_left_View" bindtap="toIndex">
+																				<image class="leftImages" src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/shouye_proc.png" mode="widthFix" />
+																</view>
+												</view>
+								</view>
+				</van-nav-bar>
+				<image class="headImages" src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/headImage.png" mode="widthFix" style="width:100%" />
+				<view class="tripartiteInfo_view tripartiteInfo_info">
+								<view class="leftTops">
+												<image class="leftImages" src="{{siteInfoData.brandLogo}}" mode="scaleToFill" />
+												<view>
+																<view class="tripartiteInfo_info_head_left_name">{{siteInfoData.stationName}}</view>
+																<view class="tripartiteInfo_info_head_left_tagList">
+																				<view class="tripartiteInfo_info_head_left_tagitem" wx:for="{{siteInfoData.serviceTags}}" wx:key="item">
+																								{{item}}
+																				</view>
+																</view>
+												</view>
+								</view>
+								<van-divider hairline borderColor="#F4F5F6" customStyle="margin: 30rpx 0 10rpx" />
+								<view class="tripartiteInfo_info_head">
+												<view class="tripartiteInfo_info_head_left" catchtap="lan">
+																<view class="tripartiteInfo_info_head_left_address">
+																				{{siteInfoData.address||'暂无详情地址'}}
+																</view>
+																<view class="tripartiteInfo_info_head_left_juli">
+																				<image class="juliicons" src="/image/daohang-Navigation.png" mode="scaleToFill" />
+																				距你{{siteInfoData.juli}}公里
+																</view>
+												</view>
+								</view>
+				</view>
+				<!-- 选择油号 -->
+				<view class="tripartiteInfo_view" style="padding: 0;" wx:if="{{oilNum.length}}">
+								<view class="tripartiteInfo_view_li">
+												<view class="tripartiteInfo_view_li_left tripartiteInfo_view_li_left2">选择油号</view>
+								</view>
+								<view class="optionPopup_li_tagList optionPopup_li_tagList2">
+												<block wx:for="{{oilNum}}" wx:key="item">
+																<view class="optionPopup_li_tag {{oliTableObjs.productId==item.productId?'optionPopup_li_tag2':''}}" bindtap="tabOli" data-item="{{item}}">
+																				{{item.oilGrade}}
+																</view>
+												</block>
+								</view>
+				</view>
+				<!-- 站点优惠 -->
+				<view class="tripartiteInfo_view tripartiteInfo_view2" wx:if="{{oilNum.length}}">
+								<view class="tripartiteInfo_view2List">
+												<view class="tripartiteInfo_view2ListTexts1">
+																<image class="cardimages1" src="/image/card_icon1.png" mode="scaleToFill" />
+																站点优惠
+												</view>
+												<view class="tripartiteInfo_view2ListTexts2">
+																已直降{{oliTableObjs.discountAmount}}元/L
+												</view>
+								</view>
+								<view class="tripRightViewslist">
+												<text class="tripRightViewslistitem1">￥</text>
+												<view class="tripRightViewslistitem2">{{oliTableObjs.listPrice}}</view>
+												<view class="tripRightViewslistitem1">/L</view>
+								</view>
+				</view>
+				<!-- 选择费用 -->
+				<view class="tripartiteInfo_view" wx:if="{{isWeChatPay}}">
+								<view class="topPuinptLists topPuinptLists3">
+												<view class="topPuinptListsTextsOnes {{money?'topPuinptListsTextsOnesTcolor':''}}">
+																￥
+												</view>
+												<input class="tripRightViewslistinput  {{money?'ViewslistinputTwosB':''}}" type="number" placeholder="请输入金额 实时计算优惠" value="{{money}}" bindblur="moneyInput" bindinput="moneyInputOnes" />
+												<!-- dieselInfo.wxml -->
+												<view class="topPuinptListsTexts {{money?'topPuinptListsTextsTwos':''}}">
+																约{{oilLiters}}L
+												</view>
+								</view>
+								<view class="topPuinptListsTextsOnesLists">
+												<view wx:for="{{priceTableList}}" wx:key="item" class="topPuinptListsTextsOnesListsItem {{selePrices==item.id?'OnesListsItem_Twos':''}}" bindtap="selectPreset" data-price="{{item.price}}" data-id="{{item.id}}">
+																<view class="ListsItemBoxs">
+																				<text class="ListsItemBoxs_one">￥</text>
+																				<text class="ListsItemBoxs_tree">{{item.price}}</text>
+																</view>
+																<view class="ListsItemBoxs_texts">立减￥{{item.reduceprice}}</view>
+												</view>
+								</view>
+				</view>
+				<!-- 合计优惠 -->
+				<view class="tripartiteInfo_view" style="padding: 0;" wx:if="{{isWeChatPay}}">
+								<view class="tripartiteInfo_view_li" wx:if="{{totalDiscount!=0}}">
+												<view class="tripartiteInfo_view_li_left tripartiteInfo_view_li_left2">合计优惠</view>
+												<view class="tripartiteInfo_view_li_left tripartiteInfo_view_li_left2 tripartiteInfo_view_li_left2Textss">
+																-{{totalDiscount}}
+												</view>
+								</view>
+								<van-divider hairline borderColor="#F4F5F6" customStyle="margin:0 30rpx 0 10rpx" />
+								<view class="tripartiteInfo_view_li tripartiteInfo_view_li2ss" wx:if="{{totalDiscount!=0}}">
+												<view class="tripartiteInfo_view_li_left">
+																<image class="cardimages2" src="/image/jiayouqia.png" mode="scaleToFill" />
+																平台优惠
+												</view>
+												<view class="tripartiteInfo_view_li_right">
+																<text class="tripartiteInfo_view_li2ss_right1">-{{totalDiscount}}</text>
+												</view>
+								</view>
+				</view>
+				<!-- 底部 微信支付 -->
+				<view class="tripartiteInfo_footer" wx:if="{{isWeChatPay}}">
+								<view class="tripRightViewslist">
+												<text class="tripRightViewslistitem1">￥</text>
+												<view class="tripRightViewslistitem2">{{finalAmount || 0}}</view>
+								</view>
+								<button class="tripartiteInfo_footer_button {{!finalAmount?'tripartiteInfo_footer_buttonNo':''}}" wx:disabled="{{finalAmount==0}}" bindtap="wxpay">
+												立即支付
+								</button>
+				</view>
+				<!-- 扫码支付 -->
+				<view class="tripartiteInfo_footer" wx:else>
+								<view class="tripRightViewslistTexts">
+												<view>请告知站点加注人员</view>
+												<view>
+																本次加注为
+																<text class="honsetext">壹加蓝会员加注</text>
+												</view>
+								</view>
+								<button class="tripartiteInfo_footer_button" bindtap="jiazhu">扫码加注</button>
+				</view>
+				<login></login>
+				<van-popup show="{{ show }}" round z-index="999" position="bottom" bind:click-overlay="showFn" customStyle="height: 60vh;background-color: #F7F8F9">
+								<view class="popup">
+												<view class="popup_head">
+																站点活动
+																<view class="popup_head_close" bindtap="showFn">关闭</view>
+												</view>
+												<!-- <view class="popup_li" wx:for="{{siteInfoData.actives}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+        <image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_hb.png" mode="widthFix" />
+        <view>{{itemName.active_name}}</view>
+      </view> -->
+												<!-- <view class="popup_li popup_li_blue" wx:if="{{siteInfoData.is_zy==0}}">官方合作伙伴</view> -->
+												<view class="activesListBox" wx:if="{{siteInfoData.actives.length > 0}}">
+																<view class="activesList_li" wx:for="{{siteInfoData.actives}}" wx:key="index">
+																				<view class="activesList_li_left">
+																								<image style="width: 70rpx;display: block;" src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/recharge_czhd.png" mode="widthFix" />
+																				</view>
+																				<view class="activesList_li_right">
+																								<view class="activesList_li_right_title line-">{{item.active_name}}</view>
+																								<view class="activesList_li_right_tip line-">
+																												{{item.activeinfo.mbz_string}}
+																								</view>
+																				</view>
+																</view>
+												</view>
+								</view>
+				</van-popup>
+</view>

@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-button": "@vant/weapp/button/index",
+        "osFill_navBar": "../../../components/osFill_navBar/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "login": "../../../components/login/login"
+    },
+    "navigationBarTitleText": "站点详情",
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": false
+}

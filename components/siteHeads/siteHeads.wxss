@@ -1,0 +1,224 @@
+/* pages/components/siteHeads/siteHeads.wxss */
+
+/* 网格布局容器 - 一行4个 */
+.siteHeadsProptrues_topBoxsList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 一行4列，每列平均分配 */
+    gap: 20rpx;
+    /* 网格间距 */
+    /* padding: 20rpx; */
+    box-sizing: border-box;
+    margin-top: 20rpx;
+}
+
+/* 网格子项样式 */
+.siteHeadsProptrues_topBoxsItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20rpx 10rpx;
+    background-color: #f9f9f9;
+    border-radius: 10rpx;
+    text-align: center;
+}
+
+.siteHeadsProptrues_topBoxsItem_text {
+    font-size: 24rpx;
+    color: #3A4451;
+    margin-top: 10rpx;
+}
+
+/* 以下是您现有的样式 */
+.swiperBox {
+    display: flex;
+    align-items: center;
+    padding-left: 30rpx;
+    box-sizing: border-box;
+
+}
+
+.tableLists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20rpx;
+
+}
+
+.tableList_texts {
+    font-size: 33rpx;
+    color: rgba(124, 125, 138, 1);
+    font-weight: bold;
+
+}
+
+.tableList_texts1 {
+    font-size: 33rpx;
+    color: rgba(55, 78, 245, 1);
+    font-weight: bold;
+
+}
+
+.tableList_border {
+    width: 33rpx;
+    height: 6rpx;
+    border-radius: 10rpx;
+    background-color: rgba(55, 78, 245, 0);
+    margin: 0 auto;
+
+    margin-top: 10rpx;
+
+}
+
+.tableList_border1 {
+    width: 33rpx;
+    height: 6rpx;
+    border-radius: 10rpx;
+    background-color: rgba(55, 78, 245, 1);
+    margin: 0 auto;
+
+    margin-top: 10rpx;
+
+}
+
+.sosuoseleView {
+    display: flex;
+    padding: 0 30rpx;
+    justify-content: space-between;
+}
+
+.letButtonssz {
+    width: 571rpx;
+    height: 82rpx;
+    background-color: rgba(250, 250, 250, 1);
+    border-radius: 17rpx;
+    display: flex;
+    align-items: center;
+    padding: 10rpx;
+    box-sizing: border-box;
+}
+
+.rightButtonssz {
+    width: 97rpx;
+    height: 82rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(250, 250, 250, 1);
+    border-radius: 17rpx;
+}
+
+.search_left_one {
+    min-width: 25rpx;
+    height: 25rpx;
+    margin-left: 10rpx;
+}
+
+.search_left_input {
+    width: 100%;
+    margin: 0 20rpx;
+    font-size: 25rpx;
+}
+
+.search_left_button {
+    width: 180rpx !important;
+    height: 62rpx;
+    background: #374EF5;
+    border-radius: 18rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    font-size: 25rpx;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+}
+
+.szimages {
+    width: 34rpx;
+    height: 34rpx;
+}
+
+.siteHeadsProp2s {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+
+}
+
+.siteHeadsProptrues {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 0rpx 0rpx 25rpx 25rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.siteHeadsProptrues_button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40rpx;
+}
+
+.siteHeadsProptrues_button_left {
+    width: 331rpx;
+    height: 99rpx;
+    background: #F9F9F9;
+    border-radius: 11rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    font-size: 27rpx;
+    color: #3A4451;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.siteHeadsProptrues_button_right {
+    width: 331rpx;
+    height: 99rpx;
+    background: rgba(55, 78, 245, 1);
+    border-radius: 11rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    font-size: 27rpx;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.siteHeadsProptrues_topBoxsText {
+    font-weight: bold;
+    font-size: 27rpx;
+    color: #3A4451;
+}
+
+.boxsButtons {
+    width: 100%;
+    border: none;
+    height: 74rpx;
+    background: #F9F9F9;
+    border-radius: 11rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 27rpx;
+    color: #3A4451;
+}
+
+.boxsButtons2 {
+    background: rgba(55, 78, 245, 1);
+    color: #FFFFFF;
+}
+
+.siteHeadsProptrues_ButtonHides {
+    height: 100%;
+}

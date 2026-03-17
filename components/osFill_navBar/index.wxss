@@ -1,0 +1,79 @@
+/* fleetModule/fleet_components/fleet_navBar/index.wxss */
+.navTitleClass {
+  font-weight: bold !important;
+  font-size: 30rpx !important;
+}
+
+.leftBox {
+  width: 170rpx;
+  height: 62rpx;
+  border-radius: 62rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.leftBox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 200%;
+  border: 1px solid #E3E3E3;
+  transform-origin: 0 0;
+  transform: scale(0.5);
+  border-radius: 124rpx;
+  z-index: -1;
+}
+
+.leftBox van-icon {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+.leftBox van-icon:first-of-type {
+  position: relative;
+}
+
+.leftBox van-icon:first-of-type:after {
+  content: "";
+  width: 1rpx;
+  height: 34rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -17rpx;
+  transform: scaleX(0.3);
+}
+
+.customClass,
+.customClassTwo {
+  background-color: transparent !important;
+}
+
+.customClass .leftBox {
+  /* color: white !important; */
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: transparent;
+}
+
+.customClass .leftBox::after{
+    z-index: -100;
+    opacity: 0;
+}
+
+.customClassTwo .leftBox {
+  background-color: #fcfffe;
+}
+
+.customClass .leftBox van-icon:first-of-type:after {
+  /* background-color: #ffffff; */
+}
+
+.customClass .navTitleClass {
+  color: white;
+}

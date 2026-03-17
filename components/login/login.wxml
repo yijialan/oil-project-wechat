@@ -1,0 +1,30 @@
+<van-popup show="{{innerShow }}" round z-index="99999" position="bottom">
+	<view class="weui-half-screen-dialog">
+		<view class="weui-half-screen-dialog__hd">
+			<text class="weui-half-screen-dialog__title">{{title}}</text>
+		</view>
+		<view class="weui-half-screen-dialog__bd">
+			<view class="weui-half-screen-dialog__tips">{{desc1}}</view>
+			<view class="weui-half-screen-dialog__tips" style="color:blue;font-weight: bold;font-size: 14px;">
+				<span bindtap="registerFun">《会员注册协议》</span>
+				、
+				<span bindtap="PrivacyFun">《隐私协议》</span>
+				<span wx:if="{{showPrivacy}}">、</span>
+				<span wx:if="{{showPrivacy}}" bindtap="openPrivacyContract">{{urlTitle}}</span>
+			</view>
+			<view class="weui-half-screen-dialog__tips">{{desc2}}</view>
+		</view>
+		<view class="weui-half-screen-dialog__ft" wx:if="{{!showPrivacy}}">
+			<van-button wx:if="{{!hasUserInfo}}" open-type="getPhoneNumber" block round color="#224BFC" bindgetphonenumber="getPhoneNumber">同意并登录</van-button>
+			<van-button wx:else  block round color="#224BFC" bind:tap="handleAgreePrivacyAuthorization">同意并登录</van-button>
+			<view class="weui-half-screen-dialog__ft_disagree" bindtap="handleDisagree">{{disagreeTitle}}</view>
+		</view>
+		<view class="weui-half-screen-dialog__ft" wx:else>
+			<button wx:if="{{hasUserInfo}}" open-type="agreePrivacyAuthorization" class="wxButton" bindagreeprivacyauthorization="handleAgreePrivacyAuthorization">同意并登录</button>
+			<button wx:else open-type="getPhoneNumber|agreePrivacyAuthorization" class="wxButton" bindgetphonenumber="getPhoneNumber" bindagreeprivacyauthorization="handleAgree">同意并登录</button>
+			<button open-type="agreePrivacyAuthorization" class="weui-half-screen-dialog__ft_disagree" bindagreeprivacyauthorization="handleDisagree">{{disagreeTitle}}</button>
+			<!-- <view class="weui-half-screen-dialog__ft_disagree" bindtap="handleDisagree">{{disagreeTitle}}</view> -->
+			<view class="mask" hidden="{{isClick}}"></view>
+		</view>
+	</view>
+</van-popup>

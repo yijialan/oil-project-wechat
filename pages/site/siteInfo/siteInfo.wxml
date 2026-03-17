@@ -1,0 +1,95 @@
+<view class="siteInfo">
+    <view class="info">
+        <view class="slide">
+            <swiper indicator-dots="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
+                <block wx:for="{{sitePic}}" wx:key="{{index}}">
+                    <navigator url="{{item.url}}">
+                        <swiper-item>
+                            <!-- 图片尺寸675px*321px -->
+                            <image src="{{item}}" class="slide-image" data-src="{{item}}" bindtap="previewImage" mode="aspectFit"/>
+                        </swiper-item>
+                    </navigator>
+                </block>
+            </swiper>
+        </view>
+        <!-- <image src="{{siteInfo.sitePic}}" class="sitePic"></image> -->
+        <view class="cont">
+            <view class="siteName">
+                <view class="siteName1"  >
+                     {{siteInfoData.EqptCode}}
+                </view> 
+                <view class="siteName2"  >
+                    优选站
+                </view>
+                </view>
+            <view class='star'>
+                <block wx:for="{{star}}">
+                    <image src='/image/star.png' mode='widthFix'></image>
+                </block>
+                <view>{{star}}.0</view>
+            </view>
+            <view class="add">
+                <view class="dizhi">
+                    <view class="address" style="font-size: 20rpx;">{{siteInfoData.address}}</view>
+                    <view class="statue">
+                        <view>{{siteInfo.siteStatue}}</view>
+                        <view >{{siteInfo.time}}</view>
+                        <view>{{siteInfo.car}}</view>
+                    </view>
+                </view>
+                <view class="distance" bindtap='lan'>
+                    <image src="/image/site_info_icon.png"></image>
+                    <view>{{siteInfoData.Positions}}公里</view>
+                </view>
+            </view>
+            <view class="label">
+                <block wx:for="{{label}}">
+                    <view>{{item}}</view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="company">
+        <view class="listt">
+            <view>运营商</view>
+            <text>{{company.name}}</text>
+        </view>
+        <view class="listt">
+            <view>站点电话</view>
+            <text>{{company.phone}}</text>
+        </view>
+        <view class="listt">
+            <view>停车费</view>
+            <text>{{company.car}}</text>
+        </view>
+    </view>
+    <view class="tip">
+        <view class="titt">温馨提示：</view>
+        <view class="con">
+            <view>1、此加注仅限在第三方合作加注站点使用</view>
+            <view>2、本次加注为特惠加注，低于站点挂牌价</view>
+            <view>3、请扫码站点工作人员二维码进行加注</view>
+        </view>
+    </view>
+</view>
+<!-- 底部 -->
+<view class="saoma">
+    <view class="price">
+        <view class="top">
+            <view>{{siteInfoData.price}}</view>
+            <view>元 / 升 (含服务费)</view>
+        </view>
+        <view class="bot">
+            <view>原价</view>
+            <view class="yprice">{{siteInfo.yprice}}</view>
+            <view> 元 / 升</view>
+        </view>
+    </view>
+    <view class="jiazhu" bindtap="jiazhu">
+        <image src="/image/ssite_info_saoma.png"></image>
+        <view>扫码加注</view>
+    </view>
+</view>
+<van-dialog id="van-dialog" />
+<!-- 自定义组件-登录弹窗 -->
+<login></login>

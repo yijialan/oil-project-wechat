@@ -1,0 +1,18 @@
+<template name="tabBar">
+    <view class="tab-bar">
+        <block wx:for="{{tabBar}}" wx:for-item="item" wx:key="tabBar">
+            <view class="tabBar-item {{item.current== 1 ? 'tabBartext' :''}}">
+                <navigator open-type="redirect" url="{{item.pagePath}}">
+                    <view><image class="icon" src='{{item.iconPath}}' mode="heightFix"></image></view>
+                    <view class="text {{item.current== 1 ? 'tabBartext' :''}}">{{item.text}}</view>
+                </navigator>
+            </view>
+        </block>
+    </view>
+    <!-- <view class="scan" bindtap="scanCode">
+        <image class="icon" src="/image/scanCode-1.png"></image>
+        <image class="line" src="/image/line.png"></image>
+        <view class="line"></view>
+        <view class="text"> 扫码</view>
+    </view> -->
+</template>

@@ -1,0 +1,270 @@
+/* pages/paymentSuccess/paymentSuccess.wxss */
+page {
+  border-top: 0;
+  background-color: #f7f8fa;
+  letter-spacing: 0rpx;
+}
+
+image{
+	width: auto;
+	height: auto;
+}
+
+.paymentSuccess{
+	padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+.paymentSuccess_bg {
+  position: fixed;
+  background-color: #224bfb;
+  height: 490rpx;
+  width: 100%;
+  top: 0;
+  z-index: -1;
+}
+
+.paymentSuccess_bg image{
+	width: 256rpx;
+	position: absolute;
+	right: 0;
+	top: 37%;
+}
+
+.leftBox {
+  width: 170rpx;
+  height: 62rpx;
+  border-radius: 62rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.leftBox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 200%;
+  /* border: 1px solid #e3e3e3; */
+  transform-origin: 0 0;
+  transform: scale(0.5);
+  border-radius: 124rpx;
+  z-index: -1;
+}
+
+.leftBox van-icon {
+  flex: 1;
+  display: flex;
+}
+
+.leftBox van-icon:first-of-type {
+  position: relative;
+}
+
+.leftBox van-icon:first-of-type:after {
+  content: "";
+  width: 1rpx;
+  height: 34rpx;
+  background-color: #ffffff;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -17rpx;
+  transform: scaleX(0.3);
+}
+
+.invite {
+  text-align: center;
+  border-radius: 25rpx;
+}
+
+.invite image {
+  width: 100%;
+  height: 203rpx;
+  border-radius: 20rpx;
+}
+
+.invite text {
+  display: block;
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #333;
+  padding-bottom: 10rpx;
+}
+
+.site_ad {
+  height: 230rpx;
+  margin: 30rpx;
+}
+
+.paymentSuccess_head {
+  color: #ffffff;
+  padding: 30rpx 50rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.paymentSuccess_head_title {
+  font-size: 48rpx;
+}
+
+.paymentSuccess_info {
+  background-color: #ffffff;
+  border-radius: 28rpx;
+  margin: 10rpx 30rpx 30rpx;
+  padding: 48rpx;
+}
+
+.paymentSuccess_info_head {
+  text-align: center;
+}
+
+.paymentSuccess_info_head_tip {
+  font-size: 27rpx;
+  font-weight: bold;
+}
+
+.paymentSuccess_info_head_price {
+  font-size: 44rpx;
+  font-weight: bold;
+  margin-top: 30rpx;
+}
+
+.paymentSuccess_info_head_price text {
+  font-size: 74rpx;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.paymentSuccess_info_head_subtip {
+  color: #a1a1a2;
+  font-size: 24rpx;
+}
+
+.paymentSuccess_footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0rpx 0rpx 27rpx 0rpx rgba(194, 194, 194, 0.2);
+  width: 100%;
+  padding: 30rpx 30rpx calc(30rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.paymentSuccess_info_ul{
+
+}
+
+.paymentSuccess_info_li{
+	display: flex;
+	justify-content: space-between;
+	font-size: 25rpx;
+	margin-top: 20rpx;
+}
+
+.paymentSuccess_info_li_left{
+	color: #8F8F8F;
+	width: fit-content;
+	white-space: nowrap;
+}
+
+.paymentSuccess_info_li_right{
+	font-weight: bold;
+	margin-left: 20rpx;
+	text-align: right;
+	word-break: break-all;
+}
+
+.paymentSuccess_info_li_right_small{
+	font-size: 22rpx;
+}
+
+.paymentSuccess_tel{
+	display: flex;
+	justify-content: space-between;
+	font-weight: bold;
+	align-items: center;
+	padding: 48rpx 24rpx;
+}
+
+
+.paymentSuccess_tel_left{
+	font-size: 25rpx;
+}
+
+.paymentSuccess_tel_left text{
+	font-weight: normal;
+	color: #BABABA;
+	font-size: 24rpx;
+}
+
+.paymentSuccess_tel_right{
+	color: #224BFB;
+	font-size: 28rpx;
+	white-space: nowrap;
+}
+
+
+.popup{
+	width: 600rpx;
+	background-color: #ffffff;
+	text-align: center;
+	padding-bottom: 60rpx;
+}
+
+.popup_head{
+	height: 160rpx;
+	position: relative;
+	font-size: 37rpx;
+	font-weight: bold;
+}
+.popup_head>view{
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	width: 100%;
+	transform: translate(-50%,-50%);
+
+}
+
+.popup_head::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 160rpx;
+	background: linear-gradient(#eceeff 0%, #fff 100%);
+	top: 0;
+	left: 0;
+	z-index: 0;
+  }
+
+.popup>image{
+	width: 276rpx;
+}
+
+.popup_price{
+	margin: 30rpx 0 0rpx;
+	font-size: 27rpx;
+	font-weight: bold;
+}
+
+.popup_price text{
+	color: #FF881E;
+	font-size: 35rpx;
+}
+
+.popup_price text:last-of-type{
+	font-size: 45rpx;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.popup_tip{
+	color: #B8B8B8;
+	font-size: 24rpx;
+	margin-bottom: 60rpx;
+}

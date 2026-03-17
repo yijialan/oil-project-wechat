@@ -1,0 +1,76 @@
+<view class="user-page">
+  <view class="user-hero">
+    <view class="hero-header">
+      <view class="avatar">
+        <image
+          class="avatar-image"
+          src="{{userInfo.avatarUrl || '/image/user.png'}}"
+          mode="aspectFill"
+        />
+      </view>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.nickName || '未登录用户'}}</view>
+        <view class="user-sub">
+          <text class="user-tag">{{userInfo.levelText || '普通会员'}}</text>
+          <text class="user-meta">手机号：{{userInfo.mobile || '未绑定'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="hero-footer">
+      <view class="hero-item">
+        <view class="hero-value">{{userInfo.memberId || '-'}}</view>
+        <view class="hero-label">会员编号</view>
+      </view>
+      <view class="hero-divider"></view>
+      <view class="hero-item">
+        <view class="hero-value">{{userInfo.regDate || '-'}}</view>
+        <view class="hero-label">注册日期</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stat-cards">
+    <view class="stat-card">
+      <view class="stat-value">{{userInfo.score || 0}}</view>
+      <view class="stat-label">当前积分</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{userInfo.oilAmount || '0.00'}}</view>
+      <view class="stat-label">柴油余额(元)</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{userInfo.adblueAmount || '0.00'}}</view>
+      <view class="stat-label">尿素余额(元)</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{userInfo.cardAmount || '0.00'}}</view>
+      <view class="stat-label">加油卡余额(元)</view>
+    </view>
+  </view>
+
+  <view class="info-panel">
+    <view class="panel-title">账户信息</view>
+    <view class="panel-row">
+      <view class="row-label">昵称</view>
+      <view class="row-value">{{userInfo.nickName || '-'}}</view>
+    </view>
+    <view class="panel-row">
+      <view class="row-label">手机号</view>
+      <view class="row-value">{{userInfo.mobile || '-'}}</view>
+    </view>
+    <view class="panel-row">
+      <view class="row-label">会员等级</view>
+      <view class="row-value">{{userInfo.levelText || '普通会员'}}</view>
+    </view>
+    <view class="panel-row">
+      <view class="row-label">会员编号</view>
+      <view class="row-value">{{userInfo.memberId || '-'}}</view>
+    </view>
+  </view>
+
+  <view class="footer-section">
+    <import src="/pages/tabbar/tabbar.wxml" />
+    <template is="tabBar" data="{{tabBar: bindData.tabBar}}" />
+  </view>
+  <login></login>
+</view>

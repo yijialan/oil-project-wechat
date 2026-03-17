@@ -1,0 +1,97 @@
+<!--pages/paymentSuccess/paymentSuccess.wxml-->
+<view class="paymentSuccess">
+	<osFill_navBar title="" placeholder customClass fixed>
+		<view class="leftBox">
+			<van-icon name="arrow-left" size="32rpx" bindtap="backFn" color="#ffffff" />
+			<van-icon name="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/nav_home.png" size="32rpx" bindtap="goHome" />
+		</view>
+	</osFill_navBar>
+
+	<view class="paymentSuccess_bg">
+		<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/paymentSuccess_bg.png" mode="widthFix"/>
+	</view>
+	<view class="paymentSuccess_head">
+		<view class="paymentSuccess_head_title" wx:if="{{payInfo.PayDate}}">支付成功</view>
+		<view style="opacity: 0.64;">支付时间：{{payInfo.PayDate}}</view>
+	</view>
+
+	<view class="paymentSuccess_info">
+		<view class="paymentSuccess_info_head"> 
+			<view class="paymentSuccess_info_head_price">￥<text>{{payInfo.money}}</text></view>
+			<view class="paymentSuccess_info_head_subtip">本次优惠<text style="color:#224BFC">￥{{payInfo.totalDiscount}}</text></view>
+		</view>
+		<van-divider hairline borderColor="#E4E4E4"/>
+		<view class="paymentSuccess_info_ul">
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">支付方式</view>
+				<view class="paymentSuccess_info_li_right">{{payInfo.PayType}}{{payInfo.PayType == '电子卡'?'（' + payInfo.ICNum + '）':''}}</view>
+			</view>
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">订单编号</view>
+				<view class="paymentSuccess_info_li_right">{{payInfo.TradeNo}}</view>
+			</view>
+			<!-- <view class="paymentSuccess_info_li" wx:if="{{payInfo.PayType == '电子卡'}}"> 
+				<view class="paymentSuccess_info_li_left">电子卡号</view>
+				<view class="paymentSuccess_info_li_right">{{payInfo.ICNum}}</view>
+			</view> -->
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">加注站点</view>
+				<view class="paymentSuccess_info_li_right">{{payInfo.StationName}}</view>
+			</view>
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">加注油号</view>
+				<view class="paymentSuccess_info_li_right">{{payInfo.oilGrade}}</view>
+			</view> 
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">加油金额</view>
+				<view class="paymentSuccess_info_li_right">￥ {{payInfo.money}}</view>
+			</view> 
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">优惠金额</view>
+				<view class="paymentSuccess_info_li_right">￥ {{payInfo.totalDiscount}}</view>
+			</view> 
+			<view class="paymentSuccess_info_li"> 
+				<view class="paymentSuccess_info_li_left">付款金额</view>
+				<view class="paymentSuccess_info_li_right">￥ {{payInfo.PayAmount}}</view>
+			</view> 
+		</view>
+	</view>
+
+	 
+
+	<view class="paymentSuccess_info paymentSuccess_tel" bind:tap="makePhone">
+		<view class="paymentSuccess_tel_left">在线客服<text>（机器故障、疑问订单）</text></view>
+		<view class="paymentSuccess_tel_right">400-088-6578</view>
+	</view>
+
+	<swiper class="site_ad" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{3000}}" duration="{{800}}" circular wx:if="{{dayactivesList.length>0}}">
+		<block wx:for="{{dayactivesList}}" wx:key="index">
+			<swiper-item>
+				<view class="invite">
+					<view bindtap="dayactivesUrlFun" data-item="{{item}}" data-type="{{item.type}}" data-id="{{item.id}}" data-url="{{item.url}}">
+						<image src="{{item.logo}}"></image> 
+					</view>
+					<!-- <text>{{item.name}}</text> -->
+				</view>
+			</swiper-item>
+		</block>
+	</swiper>
+
+	<view class="paymentSuccess_footer">
+		<!-- <van-button plain bindtap="backFn" custom-style="border-radius: 10rpx;margin-right: 30rpx">在线开票</van-button> -->
+        <van-button color="#224BFB" bindtap="backFn" custom-style="border-radius: 10rpx;background:#F5F7FF;color:#224BFB">继续付款加注</van-button>
+    </view>
+
+	<van-popup show="{{ dialogShow }}" round z-index="999" custom-style="background-color: transparent;">
+	<view class="popup">
+		<view class="popup_head">
+			<view>支付成功，请出示给加油员查看</view>
+			 
+		</view>
+		<image src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/main_sy.png" mode="widthFix"/>
+		<view class="popup_price"><text>￥</text><text>{{payInfo.money}}</text></view>
+		<view class="popup_tip">本次优惠<text style="color:#224BFC">￥{{payInfo.totalDiscount}}</text></view>
+		<van-button custom-style="width: 500rpx" round color="#224BFC" bindtap="onDialogShowClickFun">好的<text>（{{voiceTime}}s）</text></van-button>
+	</view>
+</van-popup>
+</view>

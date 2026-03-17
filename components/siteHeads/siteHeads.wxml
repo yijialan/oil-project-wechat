@@ -1,0 +1,70 @@
+<view class="siteHeadBoxs" hover-class="none" hover-stop-propagation="false">
+    <view class="siteHead" style="padding:{{statusBarHeight - 38}}px 0rpx 0rpx">
+        <view class="swiperBox">
+            <view class="tableLists" wx:for="{{tableList}}" wx:key="index">
+                <view class="tableList_texts {{currentIndex === item.id ? 'tableList_texts1' : ''}}" data-id="{{item.id}}" bindtap="handleTabClick" hover-class="none" hover-stop-propagation="false">
+                    {{item.title}}
+                </view>
+                <view class="tableList_border {{currentIndex === item.id ? 'tableList_border1' : ''}}"></view>
+            </view>
+        </view>
+        <view class="" style="height:30rpx"></view>
+        <!-- 搜索 -->
+        <view class="sosuoseleView" hover-class="none" hover-stop-propagation="false">
+            <view class="letButtonssz" hover-class="none" hover-stop-propagation="false">
+                <image class="search_left_one" src="/image/sousuo.png" mode="scaleToFill" />
+                <input class="search_left_input" type="text" placeholder="请输入目的地或加注站名" value="{{searchInputValue}}" bindinput="handleInputChange" bindfocus="handleInputFocus" hover-class="none" hover-stop-propagation="false" />
+                <button class="search_left_button" bindtap="handleSearchClick" hover-class="none" hover-stop-propagation="false">
+                    搜索
+                </button>
+            </view>
+            <view class="rightButtonssz" hover-class="none" hover-stop-propagation="false" bindtap="handleResetClickTwos">
+                <image class="szimages" wx:if="{{!isPanelVisible}}" src="/image/shezhis.png" mode="scaleToFill" />
+                <image class="szimages" wx:if="{{isPanelVisible}}" src="/image/shezhis2.png" mode="scaleToFill" />
+            </view>
+        </view>
+        <view class="" style="height:20rpx"></view>
+    </view>
+    <!-- 下面遮罩的标注点 -->
+    <view class="siteHeadsProp" hover-class="none" hover-stop-propagation="false"></view>
+    <!-- 新增的元素，将获取到的距离作为样式 -->
+    <view class="siteHeadsProp2s" style="top: {{tops}}px" wx:if="{{isPanelVisible}}" hover-class="none" hover-stop-propagation="false">
+        <view class="siteHeadsProptrues" hover-class="none" hover-stop-propagation="false">
+            <view class="siteHeadsProptrues_top" hover-class="none" hover-stop-propagation="false">
+                <view wx:if="{{currentIndex === 1}}" class="siteHeadsProptrues_topBoxs" hover-class="none" hover-stop-propagation="false">
+                    <view class="siteHeadsProptrues_topBoxsText" hover-class="none" hover-stop-propagation="false">
+                        油号选择
+                    </view>
+                    <view class="siteHeadsProptrues_topBoxsList" hover-class="none" hover-stop-propagation="false">
+                        <view wx:for="{{tabseleList}}" wx:key="id" bindtap="handleSeleTabClick" data-id="{{item.id}}" class="boxsButtons {{SelseIndex === item.id ? 'boxsButtons2' : ''}}" hover-class="none" hover-stop-propagation="false">
+                            {{item.title}}
+                        </view>
+                    </view>
+                </view>
+                <!-- 👇 新增：筛选面板（仅在 currentIndex === 0 时显示） -->
+                <!-- 👇 把 optionList 改为 localOptionList -->
+                <view wx:if="{{currentIndex === 0}}" class="siteHeadsProptrues_topBoxs">
+                    <view wx:for="{{localOptionList}}" wx:key="index" wx:for-item="group">
+                        <view class="siteHeadsProptrues_topBoxsText">{{group.title}}</view>
+                        <view class="siteHeadsProptrues_topBoxsList">
+                            <view class="boxsButtons {{item.checkd ? 'boxsButtons2' : ''}}" bindtap="handleOptionTagClick" data-item="{{item}}" data-index="{{index}}" data-idx="{{idx}}" wx:for="{{group.list}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+                                {{item.title}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="siteHeadsProptrues_button" hover-class="none" hover-stop-propagation="false">
+                <button class="siteHeadsProptrues_button_left" bindtap="handleResetClick">
+                    重置选择
+                </button>
+                <button class="siteHeadsProptrues_button_right" bindtap="handleConfirmClick">
+                    确定查询
+                </button>
+            </view>
+        </view>
+
+        <view class="siteHeadsProptrues_ButtonHides" bindtap="handleResetClickTwos"> 
+        </view>
+    </view>
+</view>

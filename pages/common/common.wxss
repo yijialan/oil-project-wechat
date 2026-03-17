@@ -1,0 +1,104 @@
+page {
+    background-color: #ffffff;
+    font-size: 20rpx;
+}
+
+.scan {
+    height: 89rpx;
+    position: fixed;
+    z-index: 10;
+    bottom: 45rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 5px 5px 11px 5px;
+    border-radius: 50%;
+    text-align: -webkit-center;
+    box-shadow: 0px -4px 2px 0px rgba(148, 148, 148, 0.18);
+}
+
+.scan .text {
+    font-size: 24rpx;
+    color: #b3b3b3;
+}
+
+.scan .icon {
+    width: 89rpx;
+    height: 89rpx;
+}
+
+.scan image.line {
+    display: none;
+}
+
+.scan .line {
+    position: absolute;
+    width: 46rpx;
+    height: 4rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdbe47;
+    animation: line 2s infinite;
+}
+
+@keyframes line {
+    0% {
+        top: 18rpx;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        top: 60rpx;
+        opacity: 0;
+    }
+}
+
+.navigator-hover {
+    background: none;
+}
+
+.tab-bar {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 9;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: none!important;
+    box-shadow: 0px 3px 9px 0px rgba(148, 148, 148, 0.18);
+}
+
+.tab-bar image {
+    /* width: 40rpx; */
+    height: 33rpx;
+    display: inline-block;
+    margin: 0 auto;
+    will-change: transform;
+}
+
+.tab-bar .text {
+    font-size: 24rpx;
+    line-height: 24rpx;
+    margin-top: 16rpx;
+    color: #b3b3b3;
+}
+
+
+.tab-bar .tabBar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    float: left;
+    text-align: center;
+    background: none;
+    width: 50%;
+    padding: 25rpx 0;
+}
+
+.tabBartext {
+    color: #374EF5 !important;
+}

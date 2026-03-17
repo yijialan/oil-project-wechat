@@ -1,0 +1,11 @@
+<!--fleetModule/fleet_components/fleet_navBar/index.wxml-->
+<van-nav-bar title="{{title}}" title-class="{{changeTitleClass?'navTitleClass':''}}" custom-class="{{customClass?(changeTitleClass?'customClass':'customClassTwo'):''}}" border="{{border}}" fixed="{{fixed}}" placeholder="{{placeholder}}" z-index="999">
+    <view slot="left" class="leftBox" hidden="{{!leftShow}}">
+        <van-icon name="arrow-left" size="32rpx" bindtap="backFn" />
+        <!-- <van-icon wx:if="{{!fixed}}" name="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/nav_home.png" size="40rpx" bindtap="goHome" /> -->
+        <van-icon  name="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/osFillingModule/shouye_proc.png" size="32rpx" bindtap="goHome" />
+    </view>
+    <view slot="left" hidden="{{leftShow}}">
+        <slot></slot>
+    </view>
+</van-nav-bar>

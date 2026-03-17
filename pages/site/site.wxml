@@ -1,0 +1,164 @@
+<view class="site-container">
+  <!-- 顶部区域 -->
+  <image
+    class="headImages"
+    src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/headImage.png"
+    mode="widthFix"
+    style="width: 100%"
+  />
+  <view hover-class="none" hover-stop-propagation="false">
+    <siteHeads
+      tableList="{{tableList}}"
+      headTable="{{headTable}}"
+      optionList="{{optionList}}"
+      bind:tabchange="handleTabClick"
+      bind:search="onSearchFromChild"
+    />
+  </view>
+  <!-- 中间可滚动区域 -->
+  <scroll-view
+    class="main-content"
+    scroll-y="true"
+    enable-back-to-top="true"
+    scroll-with-animation="true"
+    bindscrolltolower="onReachBottom"
+  >
+    <view class="siteList">
+      <view wx:if="{{headTable==0}}">
+        <view
+          class="siteList_li {{item.is_zy==1?'izzy':item.is_other==1?'izyx':'izhz'}} {{item.fault_title ?'list_filter':''}}"
+          wx:for="{{listData}}"
+          wx:key="index"
+          bindtap="goPage"
+          data-item="{{item}}"
+        >
+          <view class="siteList_li_tag">
+            {{item.is_zy==1?'自营站点':item.is_other==1?'优选站点':''}}
+          </view>
+          <view class="siteList_li_name">{{item.EqptCode}}</view>
+          <view class="siteList_li_address">
+            <view class="siteList_li_address_left">
+              {{item.address || '暂无详情地址'}}
+            </view>
+            <view class="siteList_li_address_right" data-item="{{item}}" catchtap="getLocationTwos">
+              <image
+                src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_guide.png"
+                mode="widthFix" />
+              {{item.kilometer}}km
+            </view>
+          </view>
+          <van-divider
+            hairline
+            borderColor="#EDEDED"
+            customStyle="margin: 30rpx 0 10rpx"
+          />
+          <view class="siteList_li_priceList1">
+            <view class="siteList_li_priceList_view siteList_li_priceList_blue" wx:if="{{item.notShowUrea}}">
+              <view class="siteList_li_priceList_view_view">
+                尿素售价
+                <view>
+                  <text>￥</text>
+                  <text>{{item.Price}}</text>
+                  <text>/Kg</text>
+                </view>
+              </view>
+            </view>
+            <view class="siteList_li_priceList_view siteList_li_priceList_blue" wx:for="{{item.commodityList}}"
+              wx:for-index="commodityIdx" wx:for-item="commodityItem" wx:key="commodityIdx">
+              <view class="siteList_li_priceList_view_view">
+                {{commodityItem.name}}
+                <view>
+                  <text>￥</text>
+                  <text>{{commodityItem.sku[0].price}}</text>
+                  <text>/桶</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="siteList_li_priceList notShowUreaClass">
+            <swiper vertical class="site_oli" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{3000}}"
+              duration="{{800}}" circular wx:if="{{item.oil_pricesList.length>0}}">
+              <block wx:for="{{item.oil_pricesList}}" wx:for-index="oilIdx" wx:for-item="oilItem" wx:key="oilIdx">
+                <swiper-item class="siteList_li_priceList_oli">
+                  <view
+                    class="siteList_li_priceList_view {{oilChildIdx%2?'siteList_li_priceList_orange':'siteList_li_priceList_red'}}"
+                    wx:for="{{oilItem}}" wx:for-index="oilChildIdx" wx:for-item="oilChildItem" wx:key="oilChildIdx">
+                    <view class="{{oilChildIdx%2?'siteList_li_priceList_view_view':''}}">
+                      {{oilChildItem.name}}
+                      <view>
+                        <text>￥</text>
+                        <text>{{oilChildItem.price}}</text>
+                        <text>/L</text>
+                      </view>
+                    </view>
+                  </view>
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+          <view class="siteList_li_footer">
+            <view
+              class="siteList_li_footer_orange"
+              wx:for="{{item.actives}}"
+              wx:for-index="idx"
+              wx:for-item="itemName"
+              wx:key="idx"
+            >
+              <image
+                src="https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx9816c7566b7fde8f/site/site_hb.png"
+                mode="widthFix"
+              />
+              <view>{{itemName.active_name}}</view>
+            </view>
+            <view class="siteList_li_footer_blue" wx:if="{{item.is_zy!=1}}">
+              官方合作伙伴
+            </view>
+          </view>
+          <view class="seal" wx:if="{{item.fault_title}}">
+            <view class="seal-son">
+              <!-- <span class="seal-son_title">暂停使用</span> -->
+              <!-- <span class="seal-son_timi">原因我是原因</span> -->
+              <span class="seal-son_title">{{item.fault_title}}</span>
+              <span class="seal-son_timi">{{item.fault_content}}</span>
+            </view>
+          </view>
+        </view>
+        <van-empty wx:if="{{listData.length === 0}}" description="暂无数据">
+          <van-button wx:if="{{!hasLocationPersmiss}}" round color="#374EF5" class="bottom-button" bind:tap="resetList">
+            前往授权
+          </van-button>
+        </van-empty>
+        <osFillLoadmore wx:else status="{{status}}"></osFillLoadmore>
+      </view>
+      <view wx:if="{{headTable==1}}">
+        <!-- pages/site/site.wxml -->
+        <siteListItem
+          wx:for="{{listData}}"
+          wx:key="index"
+          itemData="{{item}}"
+          bind:itemclick="onItemClickDiese"
+          bind:navigatetap="onNavigateTap"
+          bind:detailtap="onDetailTap"
+        ></siteListItem>
+        <van-empty wx:if="{{listData.length === 0}}" description="暂无数据">
+          <van-button wx:if="{{!hasLocationPersmiss}}" round color="#374EF5" class="bottom-button" bind:tap="resetList">
+            前往授权
+          </van-button>
+        </van-empty>
+        <osFillLoadmore wx:else status="{{status}}"></osFillLoadmore>
+      </view>
+    </view>
+    <view class="sVBh" hover-class="none" hover-stop-propagation="false"></view>
+  </scroll-view>
+  <!-- 底部区域 -->
+  <view
+    class="footer-section"
+    style="padding-bottom: {{isHide ? '0 !important' : '160rpx'}};"
+  >
+    <import src="/pages/tabbar/tabbar.wxml" />
+    <template is="{{isHide?'':'tabBar'}}" data="{{tabBar:bindData.tabBar}}" />
+    <van-dialog id="van-dialog" />
+    <!-- 自定义组件-登录弹窗 -->
+    <login></login>
+  </view>
+</view>

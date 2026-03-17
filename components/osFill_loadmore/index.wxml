@@ -1,0 +1,5 @@
+<!--fleetModule/fleet_components/fleet_loadmore/index.wxml-->
+<view style="text-align: center;padding: 20rpx 0;">
+    <van-loading size="40rpx" wx:if="{{loadingStatus === 'loading' || loadingStatus === 'loadmore'}}">加载中...</van-loading>
+    <view wx:else style="color: #606266;font-size: 26rpx;">没有更多了</view>
+</view>
