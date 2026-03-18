@@ -7,7 +7,7 @@ var qqmap = new QQMapWX({
 });
 
 const TABLE_LIST = [
-  { title: "尿素", id: 0 },
+  // { title: "尿素", id: 0 },
   { title: "柴油", id: 1 },
 ];
 
@@ -66,7 +66,7 @@ Page({
     popupType: 0, // 0 全部，1自营。2，优选，3合作
     SiteType: "",
     tags: "",
-    headTable: 0, //设置头部下标 //主回应到的table index
+    headTable: 1, //设置头部下标 //主回应到的table index
     activeShow: false,
     isHide: false,
     statusBarHeight: app.globalData.statusBarHeight,
@@ -230,7 +230,7 @@ onSearchFromChild(e) {
       (item) => item.id === targetId
     );
 
-    this.setData({ headTable: headTableObjs ? headTableObjs.id : 0 });
+    this.setData({ headTable: headTableObjs ? headTableObjs.id : 1 });
   },
   // 获取登录信息
   getWeixinLoginInfo() {

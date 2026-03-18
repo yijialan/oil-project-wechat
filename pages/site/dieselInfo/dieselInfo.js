@@ -582,6 +582,29 @@ jiazhu() {
     });
   },
   onLoad(options) {
+    if (options.scene) {
+      const scene = decodeURIComponent(options.scene);
+      console.log("scene", scene);
+      if (scene) {
+        let hash = {};
+        let uri = decodeURIComponent(scene).split("?")[1] || [];
+        uri.split("&").forEach(item => {
+          let [key, value] = item.split("=");
+          hash[key] = value;
+        });
+        options = hash;
+      }
+    }
+    if (options.q) {
+      let hash = {};
+      let uri = decodeURIComponent(options.q).split("?")[1] || [];
+      uri.split("&").forEach(item => {
+        let [key, value] = item.split("=");
+        hash[key] = value;
+      });
+      options = hash;
+    }
+    console.log('options',options)
     
     this.getusersFun(); //获取用户信息
     this.setData({ stationId: options.stationId,connection : options.connection?true:false });
