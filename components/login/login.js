@@ -54,6 +54,11 @@ Component({
         },
     },
     methods: {
+        getCurrentRoute() {
+            const pages = getCurrentPages();
+            const currentPage = pages[pages.length - 1];
+            return currentPage ? currentPage.route : "";
+        },
         checkPrivacySetting() {
             if (!wx.getPrivacySetting) return Promise.resolve(false);
 
@@ -61,13 +66,17 @@ Component({
                 wx.getPrivacySetting({
                     success: (res) => {
                         if (res.needAuthorization) {
+                            const currentRoute = this.getCurrentRoute();
+                            const isNoPopupPage = this.data.pageList.includes(currentRoute);
                             this.setData({
                                 urlTitle: res.privacyContractName,
                                 showPrivacy: true,
                             });
-                            this.popUp();
-                            resolve(true);
-                            return;
+                            if (!isNoPopupPage) {
+                                this.popUp();
+                                resolve(true);
+                                return;
+                            }
                         }
                         resolve(false);
                     },
@@ -89,6 +98,9 @@ Component({
                 "get"
             );
 
+            const currentRoute = this.getCurrentRoute();
+            const isNoPopupPage = this.data.pageList.includes(currentRoute);
+
             this.setData({ sessionData: sessionInfo.data, isClick: true });
 
             if (userDataRes.count > 0) {
@@ -109,7 +121,9 @@ Component({
                 });
 
                 if (!appUserData.memberMobile) {
-                    this.popUp();
+                    if (!isNoPopupPage) {
+                        this.popUp();
+                    }
                 } else {
                     this.disPopUp();
                     this.triggerEvent("refresh", true);
@@ -120,7 +134,9 @@ Component({
             }
 
             wx.setStorageSync("is_newUser", true);
-            this.popUp();
+            if (!isNoPopupPage) {
+                this.popUp();
+            }
         },
         // 获取登录信息
         getWeixinLoginInfo() {
