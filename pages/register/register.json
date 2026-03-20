@@ -1,6 +1,6 @@
 {
+    "navigationBarTitleText": "用户注册协议",
     "usingComponents": {
-        "navigationBarTitleText": "用户注册协议",
         "van-button": "@vant/weapp/button/index"
     }
 }
