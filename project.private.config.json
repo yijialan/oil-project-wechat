@@ -18,5 +18,18 @@
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true
   },
-  "libVersion": "3.15.0"
+  "libVersion": "3.15.0",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/site/dieselInfo/dieselInfo",
+          "pathName": "pages/site/dieselInfo/dieselInfo",
+          "query": "stationId=12",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
 }

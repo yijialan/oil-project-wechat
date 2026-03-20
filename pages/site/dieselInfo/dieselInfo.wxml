@@ -157,4 +157,5 @@
 												</view>
 								</view>
 				</van-popup>
+				<login></login>
 </view>

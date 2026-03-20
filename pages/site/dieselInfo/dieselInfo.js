@@ -72,7 +72,7 @@ Page({
     stationId: "",
     isWeChatPay: false, //是否微信支付  有2为微信支付
     userList: {}, //用户信息
-    Locations:{},//自己的定位
+    Locations: {},//自己的定位
     connection: false,
   },
 
@@ -115,58 +115,58 @@ Page({
   // 输入金额--失焦
   moneyInput(e) {
     let value = e.detail.value;
-  const numValue = parseFloat(value);
-  if (numValue < 2) {
-    wx.showModal({
-      title: '温馨提示',
-      content: '加注金额不能低于￥2.00',
-      showCancel: false,
-      success: () => {
-        this.setData({
-          money: '2',
-          selePrices: "", // 清空预设选中
-        });
-        this.calculatePrice();
-      }
-    });
-    return;
-  }
+    const numValue = parseFloat(value);
+    if (numValue < 2) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '加注金额不能低于￥2.00',
+        showCancel: false,
+        success: () => {
+          this.setData({
+            money: '2',
+            selePrices: "", // 清空预设选中
+          });
+          this.calculatePrice();
+        }
+      });
+      return;
+    }
   },
-// 防抖标志位（定义在 Page 外部或 data 中均可，这里用闭包变量更简洁）
+  // 防抖标志位（定义在 Page 外部或 data 中均可，这里用闭包变量更简洁）
 
-moneyInputOnes(e) {
-  if (isModalOpen) return; // 防止重复弹窗
+  moneyInputOnes(e) {
+    if (isModalOpen) return; // 防止重复弹窗
 
-  let value = e.detail.value;
-  const numValue = parseFloat(value);
+    let value = e.detail.value;
+    const numValue = parseFloat(value);
 
-  if (numValue > 20000) {
-    isModalOpen = true; // 锁定
-    wx.showModal({
-      title: '温馨提示',
-      content: '加注金额不能超过￥20000.00',
-      showCancel: false,
-      success: () => {
-        this.setData({
-          money: '20000',
-          selePrices: "",
-        });
-        this.calculatePrice();
-        isModalOpen = false; // 解锁
-      },
-      fail: () => {
-        isModalOpen = false; // 确保即使失败也能解锁
-      }
+    if (numValue > 20000) {
+      isModalOpen = true; // 锁定
+      wx.showModal({
+        title: '温馨提示',
+        content: '加注金额不能超过￥20000.00',
+        showCancel: false,
+        success: () => {
+          this.setData({
+            money: '20000',
+            selePrices: "",
+          });
+          this.calculatePrice();
+          isModalOpen = false; // 解锁
+        },
+        fail: () => {
+          isModalOpen = false; // 确保即使失败也能解锁
+        }
+      });
+      return;
+    }
+
+    this.setData({
+      money: value,
+      selePrices: "",
     });
-    return;
-  }
-
-  this.setData({
-    money: value,
-    selePrices: "",
-  });
-  this.calculatePrice();
-},
+    this.calculatePrice();
+  },
 
   // 点击预设金额
   selectPreset(e) {
@@ -268,79 +268,79 @@ moneyInputOnes(e) {
     });
   },
 
- 
-// 扫码加注
-jiazhu() {
-  wx.scanCode({
-    onlyFromCamera: true,
-    success: (result) => {
-      console.log(result, '---------result');
-      const fullUrl = result.result;
-      console.log(fullUrl, '---------fullUrl');
 
-      // 判断是否是本小程序的站点二维码
-      if (fullUrl.includes('wx.ejiablue.com') && fullUrl.includes('/site')) {
-        try {
-          // ✅ 使用自定义解析函数，替代 new URL()
-          const url = parseUrl(fullUrl);
-          const stationId = url.searchParams.get('stationId');
-          const connection = url.searchParams.get('connection');
+  // 扫码加注
+  jiazhu() {
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (result) => {
+        console.log(result, '---------result');
+        const fullUrl = result.result;
+        console.log(fullUrl, '---------fullUrl');
 
-          if (!stationId) {
-            wx.showToast({ title: '二维码缺少站点ID', icon: 'none' });
-            return;
+        // 判断是否是本小程序的站点二维码
+        if (fullUrl.includes('wx.ejiablue.com') && fullUrl.includes('/site')) {
+          try {
+            // ✅ 使用自定义解析函数，替代 new URL()
+            const url = parseUrl(fullUrl);
+            const stationId = url.searchParams.get('stationId');
+            const connection = url.searchParams.get('connection');
+
+            if (!stationId) {
+              wx.showToast({ title: '二维码缺少站点ID', icon: 'none' });
+              return;
+            }
+
+            // 跳转到本小程序的柴油信息页
+            wx.redirectTo({
+              url: `/pages/site/dieselInfo/dieselInfo?stationId=${stationId}${connection ? `&connection=${connection}` : ''}`
+            });
+          } catch (e) {
+            console.error('解析二维码失败', e);
+            wx.showToast({ title: '二维码格式错误', icon: 'none' });
           }
-
-          // 跳转到本小程序的柴油信息页
-          wx.redirectTo({
-            url: `/pages/site/dieselInfo/dieselInfo?stationId=${stationId}${connection ? `&connection=${connection}` : ''}`
-          });
-        } catch (e) {
-          console.error('解析二维码失败', e);
-          wx.showToast({ title: '二维码格式错误', icon: 'none' });
+        } else {
+          wx.showToast({ title: '不支持的二维码', icon: 'none' });
         }
-      } else {
-        wx.showToast({ title: '不支持的二维码', icon: 'none' });
+      },
+      fail: (err) => {
+        console.error('扫码失败', err);
       }
-    },
-    fail: (err) => {
-      console.error('扫码失败', err);
-    }
-  });
-},
+    });
+  },
 
   toIndex() {
     wx.reLaunch({ url: "/pages/site/site" });
   },
-  getDistanceMatrix() { 
-  let that = this;
-  let Locations = that.data.Locations;
-  let objs = {
-    mode: 'driving',
-    from: `${Locations.latitude},${Locations.longitude}`,
-    to: `${that.data.siteInfoData.latitude},${that.data.siteInfoData.longitude}`
-  };
-
-  app.sadminHttp("/api/truck/distanceMatrix", objs, "POST").then(res => {
-   
-    
-    // ✅ 提取 distance（单位：米），转为公里
-    const distanceInMeters = res?.data?.result?.rows?.[0]?.elements?.[0]?.distance || 0;
-    const distanceInKm = (distanceInMeters / 1000).toFixed(1); // 保留1位小数，如 "19.6"
- 
-    const updatedSiteInfoData = {
-      ...that.data.siteInfoData,
-      juli: distanceInKm // 直接存数字或字符串均可，WXML 会渲染
+  getDistanceMatrix() {
+    let that = this;
+    let Locations = that.data.Locations;
+    let objs = {
+      mode: 'driving',
+      from: `${Locations.latitude},${Locations.longitude}`,
+      to: `${that.data.siteInfoData.latitude},${that.data.siteInfoData.longitude}`
     };
 
-    that.setData({
-      siteInfoData: updatedSiteInfoData
+    app.sadminHttp("/api/truck/distanceMatrix", objs, "POST").then(res => {
+
+
+      // ✅ 提取 distance（单位：米），转为公里
+      const distanceInMeters = res?.data?.result?.rows?.[0]?.elements?.[0]?.distance || 0;
+      const distanceInKm = (distanceInMeters / 1000).toFixed(1); // 保留1位小数，如 "19.6"
+
+      const updatedSiteInfoData = {
+        ...that.data.siteInfoData,
+        juli: distanceInKm // 直接存数字或字符串均可，WXML 会渲染
+      };
+
+      that.setData({
+        siteInfoData: updatedSiteInfoData
+      });
+    }).catch(err => {
+      console.error('距离计算失败', err);
+      // 可选：失败时保留原始 juli 或设为 '--'
     });
-  }).catch(err => {
-    console.error('距离计算失败', err);
-    // 可选：失败时保留原始 juli 或设为 '--'
-  });
-}, 
+  },
 
   async getLocations() {
     let that = this;
@@ -360,14 +360,14 @@ jiazhu() {
           return;
         }
 
-       
+
         const serviceTags = data.serviceTags
           ? data.serviceTags.split("#").filter((tag) => tag.trim())
           : [];
-        let isWeChatPay = data.paymentMode.includes("2")||that.data.connection;
+        let isWeChatPay = data.paymentMode.includes("2") || that.data.connection;
         data.serviceTags = serviceTags;
-        that.setData({ siteInfoData: data, isWeChatPay,Locations:res });
-           that.getDistanceMatrix()
+        that.setData({ siteInfoData: data, isWeChatPay, Locations: res });
+        that.getDistanceMatrix()
 
         that.getProductsList();
       },
@@ -389,7 +389,7 @@ jiazhu() {
           this.setData({ oilNum });
           this.tabOli(oilNum[0]); // 默认选中第一个
 
-          
+
         }
       })
       .catch((err) => {
@@ -486,11 +486,13 @@ jiazhu() {
         },
       ],
       busiParams: {
-        stationId: this.data.stationId,
-        productId: this.data.oliTableObjs.productId,
-        paymentAmount: Number(this.data.finalAmount),
-        driverPhone: this.data.userList.memberMobile,
-        remark: "",
+        gasStationOrderReq: {
+          stationId: this.data.stationId,
+          productId: this.data.oliTableObjs.productId,
+          paymentAmount: Number(this.data.finalAmount),
+          driverPhone: this.data.userList.memberMobile,
+          remark: "柴油加注",
+        }
       },
       orderNumber: "",
     };
@@ -542,7 +544,7 @@ jiazhu() {
   },
   // 调起微信支付
   payParams(params) {
-    let that=this
+    let that = this
     wx.requestPayment({
       appId: params.appId,
       timeStamp: params.timeStamp,
@@ -561,8 +563,8 @@ jiazhu() {
             TradeNo: params.trade_no,
             ICNum: "cardNum",
             PayDate: moment().format("YYYY-MM-DD HH:mm:ss"),
-            money:Number(that.data.money),//加注金额
-            totalDiscount:Number(that.data.totalDiscount),//优惠金额
+            money: Number(that.data.money),//加注金额
+            totalDiscount: Number(that.data.totalDiscount),//优惠金额
 
 
           };
@@ -581,7 +583,7 @@ jiazhu() {
       },
     });
   },
-  onLoad(options) {
+  async onLoad(options) {
     if (options.scene) {
       const scene = decodeURIComponent(options.scene);
       console.log("scene", scene);
@@ -604,10 +606,14 @@ jiazhu() {
       });
       options = hash;
     }
-    console.log('options',options)
-    
-    this.getusersFun(); //获取用户信息
-    this.setData({ stationId: options.stationId,connection : options.connection?true:false });
+    console.log('options', options)
+    await app.loginFun();
+
+    if (wx.getStorageSync("userInfo")?.unionid) {
+      this.getusersFun(); //获取用户信息
+    }
+
+    this.setData({ stationId: options.stationId, connection: options.connection ? true : false });
     this.getLocations();
     if (wx.getStorageSync("channel")) this.memberChannels();
   },
