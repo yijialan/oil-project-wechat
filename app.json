@@ -5,7 +5,9 @@
     "pages/site/tripartiteInfo/tripartiteInfo",
     "pages/site/dieselInfo/dieselInfo",
     "pages/paymentSuccess/paymentSuccess",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/register/register",
+    "pages/privacy/privacy"
   ],
   "usingComponents": {
     "login": "./components/login/login"

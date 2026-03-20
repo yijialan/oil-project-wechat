@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "navigationBarTitleText": "壹加蓝用户隐私协议",
+        "van-button": "@vant/weapp/button/index"
+    }
+}

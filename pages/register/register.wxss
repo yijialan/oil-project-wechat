@@ -1,0 +1,23 @@
+.text_mian {
+    padding: 20rpx;
+}
+
+.text_mian_title {
+    text-align: center;
+    font-size: 32rpx;
+    font-weight: bold;
+    margin-top: 20rpx;
+}
+
+.text_mian_content {
+    font-size: 20rpx;
+}
+
+.text_mian_button {
+    position: fixed;
+    text-align: center;
+    width: 80%;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
