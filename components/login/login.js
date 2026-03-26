@@ -134,13 +134,21 @@ Component({
             }
 
             wx.setStorageSync("is_newUser", true);
-            if (!isNoPopupPage) {
-                this.popUp();
+
+            // pageList 页面不弹窗时，直接走注册流程写入 userInfo
+            if (isNoPopupPage) {
+                if (!this.data.phoneInfo || !this.data.phoneInfo.purePhoneNumber) {
+                    this.setData({ phoneInfo: { purePhoneNumber: "" } });
+                }
+                await this.registerUser();
+                return;
             }
+
+            this.popUp();
         },
         // 获取登录信息
         getWeixinLoginInfo() {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 wx.login({
                     success: function(res) {
                         console.log("获取登录信息");
