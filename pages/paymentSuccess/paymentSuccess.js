@@ -65,12 +65,12 @@ Page({
               "YYYY-MM-DD HH:mm:ss",
             );
             that.setData({ payInfo: res.data[0] });
-            that.getBackgroundAudioManagerFun();
+            // that.getBackgroundAudioManagerFun(); // 按需求关闭语音播报
           } else {
             wx.hideLoading();
             let payInfo = that.data.orderInfo;
             that.setData({ payInfo });
-            that.getBackgroundAudioManagerFun();
+            // that.getBackgroundAudioManagerFun(); // 按需求关闭语音播报
           }
         });
         console.log("轮询中...");
@@ -104,13 +104,13 @@ Page({
         //this.getPaysPaylistFun(TradeNo); 轮询获取信息
         let payInfo = this.data.orderInfo;
         this.setData({ payInfo });
-        this.getBackgroundAudioManagerFun();
+        // this.getBackgroundAudioManagerFun(); // 按需求关闭语音播报
       } else {
         res.data[0].PayDate = moment(res.data[0].PayDate).format(
           "YYYY-MM-DD HH:mm:ss",
         );
         this.setData({ payInfo: res.data[0] });
-        this.getBackgroundAudioManagerFun();
+        // this.getBackgroundAudioManagerFun(); // 按需求关闭语音播报
       }
     });
   },

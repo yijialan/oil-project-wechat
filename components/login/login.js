@@ -23,7 +23,7 @@ Component({
         disagreeTitle: "不同意并返回首页",
         isClick: false, //避免接口返回慢误触
         isDisagree: false,
-        pageList: ["pages/site/site", "pages/site/siteInfo/siteInfo", "pages/site/tripartiteInfo/tripartiteInfo"],
+        pageList: ["pages/site/site", "pages/site/siteInfo/siteInfo", "pages/site/tripartiteInfo/tripartiteInfo",'pages/site/dieselInfo/dieselInfo','pages/user/user'],
     },
     lifetimes: {
         attached: async function() {

@@ -8,34 +8,25 @@
             </view>
         </view>
         <view class="siteList_li_item_images" hover-class="none" hover-stop-propagation="false" catchtap="onNavigateClick">
-            <image class="li_item_images_site_daohang" 
-                src="/image/daohang.png"
-                mode="scaleToFill"
-            />
+            <image class="li_item_images_site_daohang" src="/image/daohang.png" mode="scaleToFill" />
             <text>导航</text>
         </view>
     </view>
     <view class="dkms" hover-class="none" hover-stop-propagation="false" catchtap="onNavigateClick">
-        <image
-            class="dkmsImage"
-            src="/image/daohang-Navigation.png"
-            mode="scaleToFill"
-        /> 距您{{itemData.distanceText}}
+        <image class="dkmsImage" src="/image/daohang-Navigation.png" mode="scaleToFill" />
+        距您{{itemData.distanceText}}
     </view>
     <van-divider hairline borderColor="#EDEDED" customStyle="margin: 30rpx 0 10rpx" wx:if="{{itemData.products.length}}" />
-    <view class="itemboonBoxs" hover-class="none" hover-stop-propagation="false"  wx:if="{{itemData.products.length}}">
+    <view class="itemboonBoxs" hover-class="none" hover-stop-propagation="false" wx:if="{{itemData.products.length}}">
         <block wx:for="{{itemData.products}}" wx:key="item">
-            <view class="itemboonBoxs_item" wx:if="{{index<3}}">  
-            <view class="itemboonBoxs_itemTop">
-                <text class="itemTopSize1">{{item.oilGrade}}</text>
-                <text class="itemTopSize2">{{item.listPrice}}/L</text>
+            <view class="itemboonBoxs_item" wx:if="{{index<3}}">
+                <view class="itemboonBoxs_itemTop">
+                    <text class="itemTopSize1">{{item.oilGrade}}</text>
+                    <!-- <text class="itemTopSize2">{{item.listPrice}}/L</text> -->
+                    <text class="itemTopSize2">{{item.driverPrice}}/L</text>
+                </view>
+                <view class="itemboonBoxs_itemMiddle">已直降{{item.discountAmount}}元/L</view>
             </view>
-            <view class="itemboonBoxs_itemMiddle"> 
-                已直降{{item.discountAmount}}元/L
-            </view>
-        </view>
         </block>
-        
-        
     </view>
 </view>

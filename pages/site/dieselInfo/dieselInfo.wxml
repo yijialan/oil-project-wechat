@@ -64,7 +64,8 @@
 								</view>
 								<view class="tripRightViewslist">
 												<text class="tripRightViewslistitem1">￥</text>
-												<view class="tripRightViewslistitem2">{{oliTableObjs.listPrice}}</view>
+												<!-- <view class="tripRightViewslistitem2">{{oliTableObjs.listPrice}}</view> -->
+												<view class="tripRightViewslistitem2">{{oliTableObjs.driverPrice}}</view>
 												<view class="tripRightViewslistitem1">/L</view>
 								</view>
 				</view>
@@ -74,7 +75,7 @@
 												<view class="topPuinptListsTextsOnes {{money?'topPuinptListsTextsOnesTcolor':''}}">
 																￥
 												</view>
-												<input class="tripRightViewslistinput  {{money?'ViewslistinputTwosB':''}}" type="number" placeholder="请输入金额 实时计算优惠" value="{{money}}" bindblur="moneyInput" bindinput="moneyInputOnes" />
+												<input class="tripRightViewslistinput  {{money?'ViewslistinputTwosB':''}}" type="digit" placeholder="请输入金额 实时计算优惠" value="{{money}}" bindblur="moneyInput" bindinput="moneyInputOnes" />
 												<!-- dieselInfo.wxml -->
 												<view class="topPuinptListsTexts {{money?'topPuinptListsTextsTwos':''}}">
 																约{{oilLiters}}L

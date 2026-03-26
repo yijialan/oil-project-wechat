@@ -467,7 +467,8 @@ Page({
   async llPaOrderFun() {
     // 2. 构建订单参数
     const datas = {
-      user_id: this.data.userList.memberId,
+      // user_id: this.data.userList.memberId,
+      user_id: wx.getStorageSync("userInfo").memberId,
       busi_type: "100002",
       order_amount: Number(this.data.finalAmount),
       openId: wx.getStorageSync("userInfo").openid,
@@ -672,6 +673,32 @@ Page({
 
   showFn() {
     this.setData({ show: !this.data.show });
+  },
+
+  getShareData() {
+    const stationId = this.data.stationId || this.data.siteInfoData.stationId || "";
+    const connection = this.data.connection ? "&connection=1" : "";
+    const stationName = this.data.siteInfoData.stationName || "柴油站点详情";
+
+    return {
+      title: `油气电折扣平台`,
+      path: `/pages/site/dieselInfo/dieselInfo?stationId=${stationId}${connection}`,
+      imageUrl:
+        "https://admin-ejiablue-com.oss-cn-shenzhen.aliyuncs.com/Applet/wx7f16ef08f50f5dd9/%E5%88%86%E4%BA%AB.png",
+    };
+  },
+
+  onShareAppMessage() {
+    return this.getShareData();
+  },
+
+  onShareTimeline() {
+    const shareData = this.getShareData();
+    return {
+      title: shareData.title,
+      query: shareData.path.split("?")[1] || "",
+      imageUrl: shareData.imageUrl,
+    };
   },
 
   onShow() {
